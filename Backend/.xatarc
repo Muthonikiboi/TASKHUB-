@@ -1,0 +1,6 @@
+{
+  "databaseURL": "https://vincent-kamami-s-workspace-7hal8u.us-east-1.xata.sh/db/TaskManagementWebApp",
+  "codegen": {
+    "output": "src/xata.ts"
+  }
+}

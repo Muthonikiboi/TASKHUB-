@@ -1,0 +1,26 @@
+{
+  "done": true,
+  "migration": {
+    "name": "mig_cs7ospqu8anorsmgfq40",
+    "operations": [
+      {
+        "add_column": {
+          "table": "TasksTable",
+          "column": {
+            "pk": false,
+            "name": "title",
+            "type": "text",
+            "unique": false,
+            "comment": "",
+            "nullable": true
+          }
+        }
+      }
+    ]
+  },
+  "migrationType": "pgroll",
+  "name": "mig_cs7ospqu8anorsmgfq40",
+  "parent": "mig_cs7osc2u8anorsmgfq30",
+  "schema": "public",
+  "startedAt": "2024-10-16T09:59:04.53599Z"
+}

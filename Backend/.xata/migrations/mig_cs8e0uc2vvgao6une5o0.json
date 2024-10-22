@@ -1,0 +1,19 @@
+{
+  "done": true,
+  "migration": {
+    "name": "mig_cs8e0uc2vvgao6une5o0",
+    "operations": [
+      {
+        "rename_table": {
+          "to": "Projects",
+          "from": "Project"
+        }
+      }
+    ]
+  },
+  "migrationType": "pgroll",
+  "name": "mig_cs8e0uc2vvgao6une5o0",
+  "parent": "mig_cs8e0ov2qe4a1a2lbdmg",
+  "schema": "public",
+  "startedAt": "2024-10-17T10:01:30.578479Z"
+}

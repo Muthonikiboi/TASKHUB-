@@ -1,0 +1,18 @@
+{
+  "done": true,
+  "migration": {
+    "name": "mig_cs8e0vk2vvgao6une5p0",
+    "operations": [
+      {
+        "sql": {
+          "up": "COMMENT ON COLUMN \"Tasks\".\"project_id\" IS '{\"xata.link\":\"Projects\"}'"
+        }
+      }
+    ]
+  },
+  "migrationType": "pgroll",
+  "name": "mig_cs8e0vk2vvgao6une5p0",
+  "parent": "mig_cs8e0uc2vvgao6une5o0",
+  "schema": "public",
+  "startedAt": "2024-10-17T10:01:35.359781Z"
+}

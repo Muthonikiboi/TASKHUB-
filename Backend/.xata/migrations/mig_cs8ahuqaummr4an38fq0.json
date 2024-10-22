@@ -1,0 +1,26 @@
+{
+  "done": true,
+  "migration": {
+    "name": "mig_cs8ahuqaummr4an38fq0",
+    "operations": [
+      {
+        "add_column": {
+          "table": "ActivitySummaryTable",
+          "column": {
+            "pk": false,
+            "name": "working_hours",
+            "type": "int",
+            "unique": false,
+            "comment": "",
+            "nullable": true
+          }
+        }
+      }
+    ]
+  },
+  "migrationType": "pgroll",
+  "name": "mig_cs8ahuqaummr4an38fq0",
+  "parent": "mig_cs8aho852sg8i85mrk7g",
+  "schema": "public",
+  "startedAt": "2024-10-17T06:04:43.636833Z"
+}

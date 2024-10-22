@@ -1,0 +1,26 @@
+{
+  "done": true,
+  "migration": {
+    "name": "mig_cs7oriqu8anorsmgfq00",
+    "operations": [
+      {
+        "add_column": {
+          "table": "UsersTable",
+          "column": {
+            "pk": false,
+            "name": "password_hash",
+            "type": "text",
+            "unique": false,
+            "comment": "",
+            "nullable": true
+          }
+        }
+      }
+    ]
+  },
+  "migrationType": "pgroll",
+  "name": "mig_cs7oriqu8anorsmgfq00",
+  "parent": "mig_cs7oraaaummr4an389l0",
+  "schema": "public",
+  "startedAt": "2024-10-16T09:56:28.14002Z"
+}

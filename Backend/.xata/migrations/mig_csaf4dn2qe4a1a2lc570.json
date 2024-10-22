@@ -1,0 +1,26 @@
+{
+  "done": true,
+  "migration": {
+    "name": "mig_csaf4dn2qe4a1a2lc570",
+    "operations": [
+      {
+        "add_column": {
+          "table": "Users",
+          "column": {
+            "pk": false,
+            "name": "resetTokenExpiry",
+            "type": "int",
+            "unique": false,
+            "comment": "",
+            "nullable": true
+          }
+        }
+      }
+    ]
+  },
+  "migrationType": "pgroll",
+  "name": "mig_csaf4dn2qe4a1a2lc570",
+  "parent": "mig_csaf3of2qe4a1a2lc560",
+  "schema": "public",
+  "startedAt": "2024-10-20T12:06:15.731867Z"
+}

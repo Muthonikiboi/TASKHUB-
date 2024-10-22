@@ -1,0 +1,19 @@
+{
+  "done": true,
+  "migration": {
+    "name": "mig_cs8difc2vvgao6une510",
+    "operations": [
+      {
+        "rename_table": {
+          "to": "Users",
+          "from": "User"
+        }
+      }
+    ]
+  },
+  "migrationType": "pgroll",
+  "name": "mig_cs8difc2vvgao6une510",
+  "parent": "mig_cs8dia72qe4a1a2lbda0",
+  "schema": "public",
+  "startedAt": "2024-10-17T09:30:37.982476Z"
+}

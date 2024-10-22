@@ -1,0 +1,26 @@
+{
+  "done": true,
+  "migration": {
+    "name": "mig_cs7orqo52sg8i85mrbug",
+    "operations": [
+      {
+        "add_column": {
+          "table": "UsersTable",
+          "column": {
+            "pk": false,
+            "name": "created_at",
+            "type": "timestamptz",
+            "unique": false,
+            "comment": "",
+            "nullable": true
+          }
+        }
+      }
+    ]
+  },
+  "migrationType": "pgroll",
+  "name": "mig_cs7orqo52sg8i85mrbug",
+  "parent": "mig_cs7oriqu8anorsmgfq00",
+  "schema": "public",
+  "startedAt": "2024-10-16T09:57:00.544672Z"
+}

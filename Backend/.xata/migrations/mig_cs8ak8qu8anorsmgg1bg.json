@@ -1,0 +1,26 @@
+{
+  "done": true,
+  "migration": {
+    "name": "mig_cs8ak8qu8anorsmgg1bg",
+    "operations": [
+      {
+        "add_column": {
+          "table": "RemindersTable",
+          "column": {
+            "pk": false,
+            "name": "reminder_time",
+            "type": "timestamptz",
+            "unique": false,
+            "comment": "",
+            "nullable": true
+          }
+        }
+      }
+    ]
+  },
+  "migrationType": "pgroll",
+  "name": "mig_cs8ak8qu8anorsmgg1bg",
+  "parent": "mig_cs8ajq2u8anorsmgg1ag",
+  "schema": "public",
+  "startedAt": "2024-10-17T06:09:40.326599Z"
+}

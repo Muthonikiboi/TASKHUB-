@@ -1,0 +1,18 @@
+{
+  "done": true,
+  "migration": {
+    "name": "mig_cs8d3h2aummr4an38gqg",
+    "operations": [
+      {
+        "drop_table": {
+          "name": "UsersTable"
+        }
+      }
+    ]
+  },
+  "migrationType": "pgroll",
+  "name": "mig_cs8d3h2aummr4an38gqg",
+  "parent": "mig_cs8d37052sg8i85mrl20",
+  "schema": "public",
+  "startedAt": "2024-10-17T08:58:45.798196Z"
+}

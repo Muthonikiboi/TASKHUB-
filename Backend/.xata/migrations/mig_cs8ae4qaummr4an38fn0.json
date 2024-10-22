@@ -1,0 +1,26 @@
+{
+  "done": true,
+  "migration": {
+    "name": "mig_cs8ae4qaummr4an38fn0",
+    "operations": [
+      {
+        "add_column": {
+          "table": "TimeLogTable",
+          "column": {
+            "pk": false,
+            "name": "time_spent",
+            "type": "int",
+            "unique": false,
+            "comment": "",
+            "nullable": true
+          }
+        }
+      }
+    ]
+  },
+  "migrationType": "pgroll",
+  "name": "mig_cs8ae4qaummr4an38fn0",
+  "parent": "mig_cs8adsau8anorsmgg100",
+  "schema": "public",
+  "startedAt": "2024-10-17T05:56:35.949201Z"
+}
