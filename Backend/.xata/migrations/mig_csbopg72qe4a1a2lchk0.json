@@ -1,0 +1,22 @@
+{
+  "done": true,
+  "migration": {
+    "name": "mig_csbopg72qe4a1a2lchk0",
+    "operations": [
+      {
+        "drop_constraint": {
+          "up": "\"task_id\"",
+          "down": "\"task_id\"",
+          "name": "Comments__pgroll_new_task_id_key",
+          "table": "Comments",
+          "column": "task_id"
+        }
+      }
+    ]
+  },
+  "migrationType": "pgroll",
+  "name": "mig_csbopg72qe4a1a2lchk0",
+  "parent": "mig_csbonqcjvfnl258s6he0",
+  "schema": "public",
+  "startedAt": "2024-10-22T11:30:09.153755Z"
+}

@@ -1,0 +1,22 @@
+{
+  "done": true,
+  "migration": {
+    "name": "mig_csbopjs2vvgao6unf3sg",
+    "operations": [
+      {
+        "drop_constraint": {
+          "up": "\"user_id\"",
+          "down": "\"user_id\"",
+          "name": "Comments__pgroll_new_user_id_key",
+          "table": "Comments",
+          "column": "user_id"
+        }
+      }
+    ]
+  },
+  "migrationType": "pgroll",
+  "name": "mig_csbopjs2vvgao6unf3sg",
+  "parent": "mig_csbopg72qe4a1a2lchk0",
+  "schema": "public",
+  "startedAt": "2024-10-22T11:30:24.256796Z"
+}
