@@ -1,5 +1,6 @@
 import express, { Router } from "express";
 import { body } from "express-validator";
+import { protect, restrictTo } from '../middlewares/AuthMiddlewares';
 
 import {
   createTeam,
@@ -14,15 +15,15 @@ const router = express.Router();
 
 router
   .route("/")
-  .get(getAllTeams)
+  .get(protect,restrictTo('admin'),getAllTeams)
   .post([body("teamname"), body("description"),body("user_id")], createTeam);
 
 router
   .route("/:id")
   .get(getTeamById)
   .patch([body("teamname"), body("description")], updateTeamById)
-  .delete(deletTeamById);
+  .delete(protect,restrictTo('admin'),deletTeamById);
 
-router.route("/user/:id").get(getTeamsByUserId)  
+router.route("/user/:id").get(getTeamsByUserId);  
 
   export default router;

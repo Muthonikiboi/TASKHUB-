@@ -426,7 +426,7 @@ const tables = [
         type: "text",
         notNull: true,
         unique: false,
-        defaultValue: null,
+        defaultValue: "'user'::text",
         comment: "",
       },
       {

@@ -13,7 +13,7 @@ export const protect = async (req: any, res: Response, next: NextFunction) => {
         let token: string | undefined;
 
         // accessing the token from the request
-        if(req.headers.authorization && req.headers.authorization.startWith('Bearer')) {
+        if(req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
             token = req.headers.authorization.split(' ')[1];
         }
 
@@ -23,7 +23,7 @@ export const protect = async (req: any, res: Response, next: NextFunction) => {
 
         // custom promise for token verification
         const decoded = await new Promise<DecodedToken>((resolve, reject) => {
-            jwt.verify(token, process.env.JWT as string, (err, decoded) => {
+            jwt.verify(token, process.env.JWT_SECRET as string, (err, decoded) => {
                 if(err) {
                     return reject(err);
                 }
