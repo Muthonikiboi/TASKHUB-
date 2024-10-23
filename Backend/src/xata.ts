@@ -426,7 +426,7 @@ const tables = [
         type: "text",
         notNull: true,
         unique: false,
-        defaultValue: null,
+        defaultValue: "'user'::text",
         comment: "",
       },
       {
@@ -518,10 +518,9 @@ export type DatabaseSchema = {
 const DatabaseClient = buildClient();
 
 const defaultOptions = {
-  apiKey: process.env.XATA_API_KEY, 
-  databaseURL: process.env.XATA_DATABASE_URL,
-  branch: process.env.XATA_BRANCH
- };
+  databaseURL:
+    "https://vincent-kamami-s-workspace-7hal8u.us-east-1.xata.sh/db/TaskManagementWebApp",
+};
 
 export class XataClient extends DatabaseClient<DatabaseSchema> {
   constructor(options?: BaseClientOptions) {
