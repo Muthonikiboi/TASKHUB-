@@ -93,6 +93,7 @@ export const getAllUsers = async (req: Request, res: Response, next: NextFunctio
         }
 
         res.status(200).json({
+            results: users.length,
             message: "Users fetched successfully",
             data: users
         });

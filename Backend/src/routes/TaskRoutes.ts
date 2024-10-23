@@ -7,6 +7,7 @@ import {
   getTaskById,
   updateTaskById,
   deleteTaskById,
+  getTaskByAssignedTo
 } from "../controllers/TaskController";
 
 const router = express.Router();
@@ -21,5 +22,7 @@ router
   .get(getTaskById)
   .patch([body("description"), body("status"), body("due_date")], updateTaskById)
   .delete(deleteTaskById);
+
+router.route("/assignedTo/:id").get(getTaskByAssignedTo)  
 
 export default router;

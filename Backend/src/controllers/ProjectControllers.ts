@@ -6,7 +6,25 @@ const xata = getXataClient();
 
 export const createProject = async (req: Request, res: Response, next: NextFunction) => {
     try {
-        const newProject = await xata.db.Projects.create(req.body);
+        const { projectname, team_id } = req.body;
+
+        // validate required fields
+        if(!projectname || !team_id ){
+            return next(new AppError("All fields must be filled!", 400));
+        }
+
+        // find the team by id
+        const team = await xata.db.Teams.filter({ xata_id: team_id }).getFirst();
+
+        if(!team) {
+            return next(new AppError('Team not found', 404));
+        }
+
+        // create project with team association
+        const newProject = await xata.db.Projects.create({
+            projectname,
+            team_id
+        });
 
         res.status(200).json({
             message: "Project created successfully",
@@ -18,11 +36,36 @@ export const createProject = async (req: Request, res: Response, next: NextFunct
     }
 }
 
+export const getProjectByTeamId = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const { team_id } = req.params;
+
+        // find the team
+        const team = await xata.db.Teams.filter({ xata_id: team_id }).getFirst();
+
+        if(!team){
+            return next(new AppError("Team not found", 404));
+        }
+
+        // Get all projects for this team
+        const projects = await xata.db.Projects.filter( { xata_id: team_id }).getAll();
+
+        res.status(200).json({
+            message: "Projects fetched successfully",
+            data: projects
+        });
+
+    }catch (err) {
+        return next(new AppError("Error fetching projects", 500));
+    }
+}
+
 export const getAllProjects = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const projects = await xata.db.Projects.getAll();
 
         res.status(200).json({
+            results: projects.length,
             message: "Projects fetched successfully",
             data: projects
         });
@@ -58,9 +101,19 @@ export const getProjectById = async (req: Request, res: Response, next: NextFunc
             return next(new AppError("Task not found", 400))
         };
 
+        // Get the associated team details
+        const team = await xata.db.Teams.read(project.team_id);
+
         res.status(200).json({
             message: "Project fetched successfully",
-            data: project
+            data: {
+                ...project,
+                team: team ? {
+                    teamname: team.teamname,
+                    description: team.description
+                    
+                } : null
+            }
         });
 
     }catch (err) {

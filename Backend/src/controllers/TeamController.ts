@@ -10,11 +10,11 @@ export const createTeam = async (req: Request, res: Response, next: NextFunction
 
         // validate required fields 
         if(!teamname || !description || !user_id) {
-            return next(new AppError("All fields must be field!", 400));
+            return next(new AppError("All fields must be filled!", 400));
         }
 
-        // Find the user by id
-        const user = await xata.db.Users.filter({ xata_id: user_id }).getFirst();
+        // find the user by id
+        const user = await xata.db.Users.filter({ xata_id: user_id}).getFirst();
 
         if (!user) {
             return next(new AppError("User not found", 404));
@@ -49,7 +49,7 @@ export const getTeamsByUserId = async (req: Request, res: Response, next: NextFu
         }
 
         // Get all teams for this user
-        const teams = await xata.db.Teams.filter({ user_id }).getAll();
+        const teams = await xata.db.Teams.filter({ xata_id: user_id }).getAll();
 
         res.status(200).json({
             message: "Teams fetched successfully",
@@ -66,6 +66,7 @@ export const getAllTeams = async (req: Request, res: Response, next: NextFunctio
         const teams = await xata.db.Teams.getAll();
 
         res.status(200).json({
+            result: teams.length,
             message: "Teams fetched successfully",
             data: teams
         });

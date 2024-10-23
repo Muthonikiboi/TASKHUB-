@@ -6,7 +6,33 @@ const xata = getXataClient();
 
 export const createComment = async  (req: Request, res: Response, next: NextFunction) => {
     try {
-        const newComment = await xata.db.Comments.create(req.body);
+        const { content, task_id, user_id } = req.body;
+
+        // validate required fields
+        if(!content || !task_id || !user_id ){
+            return next(new AppError("All fields must be filled!", 400));
+        }
+
+        // find the user by id
+        const user = await xata.db.Users.filter({ xata_id: user_id}).getFirst();
+
+        if (!user) {
+            return next(new AppError("User not found", 404));
+        }
+
+        // find the task by id
+        const task = await xata.db.Tasks.filter({ xata_id: task_id }).getFirst();
+
+        if (!task) {
+            return next(new AppError("Task not found", 404));
+        }
+
+        // create comment with user and team association 
+        const newComment = await xata.db.Comments.create({
+            content,
+            task_id,
+            user_id
+        });
 
         res.status(200).json({
             message: "Comment made successfully",
@@ -18,11 +44,59 @@ export const createComment = async  (req: Request, res: Response, next: NextFunc
     }
 }
 
+export const getCommentsByTaskId = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const { task_id } = req.params;
+
+        // find the task
+        const task = await xata.db.Tasks.filter({ xata_id: task_id }).getFirst();
+
+        if(!task) {
+            return next(new AppError("Task not found",  404));
+        }
+
+        // get all comments for this task
+        const comments = await xata.db.Comments.filter({ xata_id: task_id }).getAll();
+
+        res.status(200).json({
+            message: "Comments fetched successfully",
+            data: comments
+        });
+
+    }catch (err) {
+        return next(new AppError("Error fetching comments", 500));
+    }
+}
+
+export const getCommentsByUserId = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const { user_id } = req.params;
+
+        // Find the user
+        const user = await xata.db.Users.filter({ xata_id: user_id }).getFirst();
+
+        if(!user) {
+            return next(new AppError("User not found", 404));
+        }
+
+        // Get all comments for this user
+        const comments = await xata.db.Comments.filter({ xata_id: user_id }).getAll();
+
+        res.status(200).json({
+            message: "Comments fetched successfully",
+            data: comments
+        })
+    }catch (err) {
+        return next(new AppError("Error fetching comments", 400));
+    }
+}
+
 export const getAllComments = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const comments = await xata.db.Comments.getAll();
 
         res.status(200).json({
+            results: comments.length,
             message: "Comment fetched successfully",
             data: comments
         });
@@ -58,9 +132,28 @@ export const getCommentById = async (req: Request, res: Response, next: NextFunc
             return next(new AppError("Comment not found", 400));
         };
 
+        // get the associated tasks
+        const task = await xata.db.Tasks.read(comment.task_id);
+
+        // get the associated users
+        const user = await xata.db.Users.read(comment.user_id);
+
         res.status(200).json({
             message: "Comment fetched successfully",
-            data: comment
+            data: {
+                ...comment,
+                task: task ? {
+                    description: task.description,
+                    status: task.status,
+                    createdAt: task.xata_createdat
+        
+                } : null,
+                user: user ? {
+                    username: user.username,
+                    useremail: user.useremail
+
+                }: null
+            }
         });
 
     }catch (err) {
