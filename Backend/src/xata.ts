@@ -34,14 +34,6 @@ const tables = [
     },
     primaryKey: [],
     uniqueConstraints: {
-      Comments__pgroll_new_task_id_key: {
-        name: "Comments__pgroll_new_task_id_key",
-        columns: ["task_id"],
-      },
-      Comments__pgroll_new_user_id_key: {
-        name: "Comments__pgroll_new_user_id_key",
-        columns: ["user_id"],
-      },
       _pgroll_new_Comments_xata_id_key: {
         name: "_pgroll_new_Comments_xata_id_key",
         columns: ["xata_id"],
@@ -61,7 +53,7 @@ const tables = [
         type: "link",
         link: { table: "Tasks" },
         notNull: true,
-        unique: true,
+        unique: false,
         defaultValue: null,
         comment: '{"xata.link":"Tasks"}',
       },
@@ -70,7 +62,7 @@ const tables = [
         type: "link",
         link: { table: "Users" },
         notNull: true,
-        unique: true,
+        unique: false,
         defaultValue: null,
         comment: '{"xata.link":"Users"}',
       },
@@ -132,10 +124,6 @@ const tables = [
         name: "Project__pgroll_new_projectname_key",
         columns: ["projectname"],
       },
-      Project__pgroll_new_team_id_key: {
-        name: "Project__pgroll_new_team_id_key",
-        columns: ["team_id"],
-      },
       _pgroll_new_Project_xata_id_key: {
         name: "_pgroll_new_Project_xata_id_key",
         columns: ["xata_id"],
@@ -155,7 +143,7 @@ const tables = [
         type: "link",
         link: { table: "Teams" },
         notNull: true,
-        unique: true,
+        unique: false,
         defaultValue: null,
         comment: '{"xata.link":"Teams"}',
       },
@@ -220,14 +208,6 @@ const tables = [
     },
     primaryKey: [],
     uniqueConstraints: {
-      Tasks__pgroll_new_assignedTo_key: {
-        name: "Tasks__pgroll_new_assignedTo_key",
-        columns: ["assignedTo"],
-      },
-      Tasks__pgroll_new_project_id_key: {
-        name: "Tasks__pgroll_new_project_id_key",
-        columns: ["project_id"],
-      },
       _pgroll_new_Task_xata_id_key: {
         name: "_pgroll_new_Task_xata_id_key",
         columns: ["xata_id"],
@@ -239,7 +219,7 @@ const tables = [
         type: "link",
         link: { table: "Users" },
         notNull: true,
-        unique: true,
+        unique: false,
         defaultValue: null,
         comment: '{"xata.link":"Users"}',
       },
@@ -264,7 +244,7 @@ const tables = [
         type: "link",
         link: { table: "Projects" },
         notNull: true,
-        unique: true,
+        unique: false,
         defaultValue: null,
         comment: '{"xata.link":"Projects"}',
       },
@@ -334,10 +314,6 @@ const tables = [
         name: "Team__pgroll_new_teamname_key",
         columns: ["teamname"],
       },
-      Team__pgroll_new_user_id_key: {
-        name: "Team__pgroll_new_user_id_key",
-        columns: ["user_id"],
-      },
       _pgroll_new_Team_xata_id_key: {
         name: "_pgroll_new_Team_xata_id_key",
         columns: ["xata_id"],
@@ -365,7 +341,7 @@ const tables = [
         type: "link",
         link: { table: "Users" },
         notNull: true,
-        unique: true,
+        unique: false,
         defaultValue: null,
         comment: '{"xata.link":"Users"}',
       },

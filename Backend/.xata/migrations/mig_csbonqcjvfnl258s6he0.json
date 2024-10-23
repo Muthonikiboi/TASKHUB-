@@ -1,0 +1,22 @@
+{
+  "done": true,
+  "migration": {
+    "name": "mig_csbonqcjvfnl258s6he0",
+    "operations": [
+      {
+        "drop_constraint": {
+          "up": "\"assignedTo\"",
+          "down": "\"assignedTo\"",
+          "name": "Tasks__pgroll_new_assignedTo_key",
+          "table": "Tasks",
+          "column": "assignedTo"
+        }
+      }
+    ]
+  },
+  "migrationType": "pgroll",
+  "name": "mig_csbonqcjvfnl258s6he0",
+  "parent": "mig_csaf4dn2qe4a1a2lc570",
+  "schema": "public",
+  "startedAt": "2024-10-22T11:26:33.641577Z"
+}

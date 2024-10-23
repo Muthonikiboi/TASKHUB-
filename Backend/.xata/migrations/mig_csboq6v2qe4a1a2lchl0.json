@@ -1,0 +1,22 @@
+{
+  "done": true,
+  "migration": {
+    "name": "mig_csboq6v2qe4a1a2lchl0",
+    "operations": [
+      {
+        "drop_constraint": {
+          "up": "\"team_id\"",
+          "down": "\"team_id\"",
+          "name": "Project__pgroll_new_team_id_key",
+          "table": "Projects",
+          "column": "team_id"
+        }
+      }
+    ]
+  },
+  "migrationType": "pgroll",
+  "name": "mig_csboq6v2qe4a1a2lchl0",
+  "parent": "mig_csboq1c2vvgao6unf3ug",
+  "schema": "public",
+  "startedAt": "2024-10-22T11:31:40.760787Z"
+}

@@ -1,0 +1,22 @@
+{
+  "done": true,
+  "migration": {
+    "name": "mig_csboq1c2vvgao6unf3ug",
+    "operations": [
+      {
+        "drop_constraint": {
+          "up": "\"user_id\"",
+          "down": "\"user_id\"",
+          "name": "Team__pgroll_new_user_id_key",
+          "table": "Teams",
+          "column": "user_id"
+        }
+      }
+    ]
+  },
+  "migrationType": "pgroll",
+  "name": "mig_csboq1c2vvgao6unf3ug",
+  "parent": "mig_csbopqk2vvgao6unf3tg",
+  "schema": "public",
+  "startedAt": "2024-10-22T11:31:17.635754Z"
+}

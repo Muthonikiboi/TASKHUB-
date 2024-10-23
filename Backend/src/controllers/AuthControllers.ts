@@ -1,123 +1,121 @@
-import { Request, Response } from 'express';
+import { Request, Response , NextFunction} from 'express';
 import { getXataClient } from '../xata';
-import { generateToken } from '../utils/utils';
 import bcrypt from 'bcrypt';
+import AppError from '../utils/AppError';
+import jwt from 'jsonwebtoken';
 
-interface UserRecord {
-    username: string;
-    userpassword: string;
-    useremail: string;
-    role: string
-}
+const xata = getXataClient();
 
-const client = getXataClient();
-
-const sendResponse = (res: Response, status: number, message: string, data?: any) => {
-    res.status(status).json({ message, data });
-};
-
-export const registerUser = async (req: Request<{}, {}, UserRecord>, res: Response): Promise<void> => {
-    const { useremail, userpassword, username, role } = req.body;
-
+export const registerUser = async (req: Request, res: Response, next: NextFunction) => {
     try {
-        const existingUser = await client.db.Users.filter({ useremail }).getFirst();
 
-        if (existingUser) {
-            return sendResponse(res, 400, 'Email already in use');
+        if (!req.body) {
+            return next(new AppError('Please provide username, useremail and userpassword', 400));
         }
 
-        const hashedPassword = await bcrypt.hash(userpassword, 10);
+        // comparing password
+        if(req.body.userpassword !== req.body.passwordConfirm) {
+            return next(new AppError('Passwords do not match', 400));
+        }
 
-        const newUser = await client.db.Users.create({
-            useremail,
-            userpassword: hashedPassword,
-            username,
-            role
+        // ensuring that confirm password is not sent to database
+        req.body.passwordConfirm = undefined;
+
+        // hashing the password and assigning it to entered password
+        const hashedPassword = await bcrypt.hash(req.body.userpassword, 15);
+        req.body.userpassword = hashedPassword;
+
+        // creating the user with the hashed password
+        const user = await xata.db.Users.create(req.body);
+
+        if(!user) {
+            return next(new AppError('User not created', 500));
+        }
+
+        // assign JWT token to user registered
+        const token = jwt.sign({ id: user.xata_id}, process.env.JWT_SECRET!, { expiresIn: '10d'});
+
+        res.status(201).json({
+            status: 'success',
+            token,
+            data: user
         });
 
-        console.log('User created:', newUser);
-
-        sendResponse(res, 201, 'User registered successfully', newUser);
-    } catch (error) {
-        console.error('Error during user registration:', error);
-        sendResponse(res, 500, 'Server error');
+    }catch (err) {
+        return next(new AppError('Error creating user', 500));
     }
-};
+}
 
-export const loginUser = async (req: Request<{}, {}, { useremail: string, userpassword: string }>, res: Response): Promise<void> => {
-    const { useremail, userpassword } = req.body;
-
+export const loginUser = async (req: Request, res: Response, next: NextFunction) => {
     try {
-        const user = await client.db.Users.filter({ useremail }).getFirst();
 
-        if (!user) {
-            return sendResponse(res, 404, 'User not found');
+        const { useremail, userpassword } = req.body;
+
+        // validating fields
+        if(!useremail || !userpassword) {
+            return next(new AppError('Please provide your useremail and userpassword', 400));
         }
 
-        // Compare hashed password
-        const isPasswordValid = await bcrypt.compare(userpassword, user.userpassword);
+        // filtering email by email and password for comparison
+        const user = await xata.db.Users.filter({ useremail }).select(['username', 'userpassword', 'role', 'xata_id']).getFirst();
 
-        if (isPasswordValid) {
-            const token = generateToken(user);
-
-            if (token) {
-                res.cookie('token', token, {
-                    path: '/',
-                    httpOnly: true,
-                    expires: new Date(Date.now() + 1000 * 86400), // + 1 day
-                    sameSite: false,
-                    secure: false // Set to true in production
-                });
-
-                const { xata_id, username, useremail } = user; // xata_id is automatically available
-                
-                res.status(200).json({
-                    message: "Logged in",
-                    user: { xata_id, username, useremail },
-                    token
-                });
-            } else {
-                res.status(400).json({ message: "Invalid Token" });
-            }
-        } else {
-            res.status(400).json({ message: "Invalid Credentials" });
+        if(!user) {
+            return next(new AppError('User not found', 401));
         }
-    } catch (error: any) {
-        console.error(error);
-        sendResponse(res, 500, 'Server error');
-    }
-};
 
-export const deleteUser = async (req: Request<{ xata_id: string }>, res: Response): Promise<void> => {
-    const xata_id = req.params.xata_id; // No need to parse since it's a string
+        // compare password if they match
+        const ismatch = await bcrypt.compare(userpassword, user.userpassword);
 
-    try {
-        const user = await client.db.Users.filter({ xata_id }).getFirst();
-
-        if (user) {
-            await client.db.Users.delete(user);
-
-            sendResponse(res, 200, 'User deleted successfully');
-        } else {
-            sendResponse(res, 404, 'User not found');
+        if(!ismatch) {
+            return next(new AppError('Invalid credentials', 401));
         }
-    } catch (error) {
-        console.error('Error during user deletion:', error);
-        sendResponse(res, 500, 'Server error');
-    }
-};
 
-// Function to get all users
-export const getAllUsers = async (req: Request, res: Response): Promise<void> => {
-    try {
-        const users = await client.db.Users.getAll(); // Fetch all users
+        // assign JWT token
+        const token = jwt.sign({ id: user.xata_id }, process.env.JWT_SECRET!, { expiresIn: '10d'});
 
         res.status(200).json({
-            message: "User fetched successfully",
-            data: users
-        }); // Return the list of users
-    } catch (error) {
-        console.error('Error fetching users:', error);
-        res.status(500).json({ message: 'Internal Server Error' });
+            status: 'Logged in Successfully',
+            token,
+            data: user
+        });
+
+    }catch (err) {
+        return next(new AppError('Error logging in the user', 500));
     }
-};
+}
+
+export const getAllUsers = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const users = await xata.db.Users.getAll();
+
+        if(!users) {
+            return next(new AppError('No users found', 404));
+        }
+
+        res.status(200).json({
+            message: "Users fetched successfully",
+            data: users
+        });
+
+    }catch (err) {
+        return next(new AppError("Error getting users", 500));
+    }
+}
+
+export const deleteUserById = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const userId = req.params.id;
+
+        if(!userId) {
+            return next(new AppError('User not found', 404));
+        }
+
+        await xata.db.Users.delete(userId);
+
+        res.status(200).json({ message: "User deleted successfully" });
+
+    }catch (err) {
+        return next(new AppError('Error deleting user', 500));
+    }
+}
+ 
