@@ -59,10 +59,15 @@ export const getTaskByAssignedTo = async (req: Request, res: Response, next: Nex
         }
 
         // Get all tasks for this user
-        const tasks = await xata.db.Tasks.filter({ xata_id: assignedTo }).getAll();
+        const tasks = await xata.db.Tasks.filter({ assignedTo: assignedUser.xata_id }).getAll();
+
+        if(!tasks || tasks.length === 0) {
+            return next(new AppError("No tasks assigned to this user", 404));
+        }
 
         res.status(200).json({
             message: "User tasks fetched successfully",
+            results: tasks.length,
             data: tasks
         });
 
