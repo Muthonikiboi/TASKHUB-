@@ -1,0 +1,165 @@
+:root {
+  --black: #000;
+  --white: #fff;
+  --primary: #92e3a9;
+  --pink: pink;
+  --gray: gray;
+  --fadedBlack: rgba(0, 0, 0, 0.2);
+}
+
+.TopArticle {
+  height: 10vh;
+  margin: 0 auto;
+  margin-top: 2vh;
+  border-radius: 20px;
+  width: 96%;
+  padding-top: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 2vh;
+}
+
+.BottomArticle {
+  height: auto; /* Adjusted to auto to fit content */
+  margin: 0 auto;
+  border-radius: 20px;
+  width: 96%;
+  padding-top: 2vh;
+  display: flex;
+  flex-direction: column; /* Stack team and task lists vertically */
+}
+
+.title h1 {
+  font-size: 50px;
+  color: var(--primary);
+}
+
+.title button {
+  margin-left: 20px;
+  padding: 10px 20px;
+  background-color: var(--primary);
+  border: none;
+  border-radius: 5px;
+  color: var(--white);
+  cursor: pointer;
+}
+
+.title button:hover {
+  background-color: var(--black);
+}
+
+.taskLists {
+  width: 100%;
+  margin: 1%;
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(4, 1fr); /* 4 columns layout */
+  grid-template-rows: auto; /* Allows rows to adjust based on content */
+}
+
+.grid-item {
+  text-align: center;
+  padding: 40px;
+  font-size: 20px;
+  border-radius: 8px;
+  background-color: var(--white);
+  box-shadow: 0px 4px 10px var(--fadedBlack);
+  display: flex;
+  flex-direction: column;
+}
+
+.grid-item button {
+  margin-top: 10px;
+  padding: 8px 15px;
+  background-color: var(--primary);
+  border: none;
+  border-radius: 5px;
+  color: var(--white);
+  cursor: pointer;
+}
+
+.grid-item button:hover {
+  background-color: var(--black);
+}
+
+/* Modal Overlay */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7); /* Dark background */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000; /* Ensure it appears above other elements */
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: var(--white);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  width: 400px; /* Set width for the modal */
+}
+
+.modal-content h4 {
+  margin-bottom: 10px;
+}
+
+.modal-content ul {
+  list-style-type: none; /* Remove default list styling */
+  padding: 0; /* Remove padding */
+}
+
+.modal-content input {
+  width: calc(100% - 10px);
+  margin-top: 10px;
+  border-radius: 5px;
+  border: 1px solid var(--gray);
+  padding: 5px;
+}
+
+.modal-content button {
+  margin-top: 10px;
+  padding: 8px;
+  background-color: var(--primary);
+  color: var(--white);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.modal-content button:hover {
+  background-color: var(--black);
+}
+
+/* Comments Section */
+.comments-section {
+  margin-top: 10px;
+}
+
+.comments-section input {
+  width: 100%;
+  margin-top: 10px;
+  border-radius: 5px;
+  border: 1px solid var(--gray);
+  padding: 5px;
+}
+
+.comments-section button {
+  margin-top: 5px;
+  padding: 5px;
+  background-color: var(--primary);
+  color: var(--white);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.comments-section button:hover {
+  background-color: var(--black);
+}
