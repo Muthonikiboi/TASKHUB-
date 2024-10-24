@@ -3,6 +3,9 @@ import dotenv from 'dotenv';
 import cors from 'cors';
 import morgan from 'morgan';
 
+const app: Express = express();
+
+
 dotenv.config();
 import AppError from './utils/AppError';
 import TaskRoutes from "./routes/TaskRoutes";
@@ -11,7 +14,7 @@ import ProjectRoutes from "./routes/ProjectRoutes";
 import CommentsRoutes from "./routes/CommentRoutes";
 import AuthRoutes from './routes/AuthRoutes';
 
-const app: Express = express();
+
 
 const port: number = parseInt(process.env.PORT as string, 10) || 7000;
 const host: string = 'localhost';
@@ -63,4 +66,6 @@ app.use((err: AppErrorInstance, req: Request, res: Response, next: NextFunction)
 app.listen(port, host, () => {
     console.log(`✅Server running at http://${host}:${port}🚀🌟`);
 });
+
+export default app;
 

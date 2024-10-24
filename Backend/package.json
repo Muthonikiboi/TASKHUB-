@@ -8,7 +8,8 @@
     "dev:node": "npx ts-node src/server.ts",
     "dev": "nodemon --watch src --exec ts-node src/server.ts",
     "build": "npx tsc",
-    "check": "tsc --noEmit"
+    "check": "tsc --noEmit",
+    "test": "jest"
   },
   "keywords": [],
   "author": "",
@@ -17,15 +18,21 @@
     "@types/bcrypt": "^5.0.2",
     "@types/cors": "^2.8.17",
     "@types/express": "^5.0.0",
+    "@types/jest": "^29.5.14",
     "@types/jsonwebtoken": "^9.0.7",
     "@types/morgan": "^1.9.9",
     "@types/node": "^22.7.4",
+    "@types/supertest": "^6.0.2",
     "express-validator": "7.2.0",
+    "jest": "^29.7.0",
     "morgan": "^1.10.0",
     "nodemon": "^3.1.7",
-    "typescript": "^5.6.2"
+    "supertest": "^7.0.0",
+    "ts-jest": "^29.2.5",
+    "typescript": "^5.6.3"
   },
   "dependencies": {
+    "@jest/globals": "^29.7.0",
     "@xata.io/client": "0.0.0-next.va121e4207b94bfe0a3c025fc00b247b923880930",
     "bcrypt": "^5.1.1",
     "cors": "^2.8.5",

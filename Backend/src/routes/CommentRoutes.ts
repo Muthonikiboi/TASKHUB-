@@ -24,7 +24,7 @@ router
   .patch([body("content")], updateCommentById)
   .delete(deleteCommentById);
 
-router.route("/task/:id").get(getCommentsByTaskId);
-router.route("/user/:id").get(getCommentsByUserId);
+// router.route("/task/:id").get(getCommentsByTaskId);
+// router.route("/user/:id").get(getCommentsByUserId);
 
 export default router;
