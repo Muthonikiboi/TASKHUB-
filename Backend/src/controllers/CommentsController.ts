@@ -54,9 +54,13 @@ export const getCommentsByTaskId = async (req: Request, res: Response, next: Nex
         if(!task) {
             return next(new AppError("Task not found",  404));
         }
-
+        
         // get all comments for this task
-        const comments = await xata.db.Comments.filter({ xata_id: task_id }).getAll();
+        const comments = await xata.db.Comments.filter({ task_id: task.xata_id }).getAll();
+
+        if(!comments || comments.length === 0) {
+            return next(new AppError("No comments found for this task", 404));
+        }
 
         res.status(200).json({
             message: "Comments fetched successfully",
@@ -80,12 +84,18 @@ export const getCommentsByUserId = async (req: Request, res: Response, next: Nex
         }
 
         // Get all comments for this user
-        const comments = await xata.db.Comments.filter({ xata_id: user_id }).getAll();
+        const comments = await xata.db.Comments.filter({ user_id: user.xata_id }).getAll();
+
+        if(!comments || comments.length === 0) {
+            return next(new AppError("No comments found for this user", 404));
+        }
 
         res.status(200).json({
             message: "Comments fetched successfully",
+            results: comments.length,
             data: comments
-        })
+        });
+
     }catch (err) {
         return next(new AppError("Error fetching comments", 400));
     }

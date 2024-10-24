@@ -48,10 +48,15 @@ export const getProjectByTeamId = async (req: Request, res: Response, next: Next
         }
 
         // Get all projects for this team
-        const projects = await xata.db.Projects.filter( { xata_id: team_id }).getAll();
+        const projects = await xata.db.Projects.filter( { team_id: team.xata_id }).getAll();
+
+        if(!projects || projects.length === 0) {
+            return next(new AppError("No projects for this team", 404));
+        }
 
         res.status(200).json({
             message: "Projects fetched successfully",
+            results: projects.length,
             data: projects
         });
 
