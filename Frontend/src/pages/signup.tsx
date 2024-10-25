@@ -108,7 +108,7 @@ function SignUp() {
         };
 
         try {
-            const response = await axios.post('http://localhost:7000/api/v1/users/register', userData, {
+            const response = await axios.post('http://localhost:3000/api/v1/users/register', userData, {
                 headers: {
                     'Content-Type': 'application/json',
                 }
@@ -121,8 +121,9 @@ function SignUp() {
                 setPassword('');
             } else {
                 console.log(response.data.status)
-                alert(response.data.message || 'Something went wrong!');
+                alert(response.data.status|| 'Something went wrong!');
             }
+            
         } catch (error) {
             console.error('Error:', error);
             alert('Failed to create user');
