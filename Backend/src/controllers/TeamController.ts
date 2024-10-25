@@ -49,10 +49,15 @@ export const getTeamsByUserId = async (req: Request, res: Response, next: NextFu
         }
 
         // Get all teams for this user
-        const teams = await xata.db.Teams.filter({ xata_id: user_id }).getAll();
+        const teams = await xata.db.Teams.filter({ user_id: user.xata_id }).getAll();
+
+        if(!teams || teams.length === 0) {
+            return next(new AppError("User not found in any team", 404));
+        }
 
         res.status(200).json({
             message: "Teams fetched successfully",
+            results: teams.length,
             data: teams
         });
 
