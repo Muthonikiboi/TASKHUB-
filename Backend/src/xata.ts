@@ -395,10 +395,6 @@ const tables = [
         name: "Users__pgroll_new_useremail_key",
         columns: ["useremail"],
       },
-      Users__pgroll_new_username_key: {
-        name: "Users__pgroll_new_username_key",
-        columns: ["username"],
-      },
       _pgroll_new_Users_xata_id_key: {
         name: "_pgroll_new_Users_xata_id_key",
         columns: ["xata_id"],
@@ -441,7 +437,7 @@ const tables = [
         name: "username",
         type: "text",
         notNull: true,
-        unique: true,
+        unique: false,
         defaultValue: null,
         comment: "",
       },
@@ -518,10 +514,10 @@ export type DatabaseSchema = {
 const DatabaseClient = buildClient();
 
 const defaultOptions = {
-  apiKey: process.env.XATA_API_KEY, 
-  databaseURL: process.env.XATA_DATABASE_URL,
-  branch: process.env.XATA_BRANCH
- };
+  databaseURL:"https://vincent-kamami-s-workspace-7hal8u.us-east-1.xata.sh/db/TaskManagementWebApp",
+  apiKey:process.env.XATA_API_KEY,
+  branch:process.env.XATA_BRANCH
+};
 
 export class XataClient extends DatabaseClient<DatabaseSchema> {
   constructor(options?: BaseClientOptions) {

@@ -6,7 +6,7 @@ const router = Router();
 
 router.post("/register", registerUser);
 router.post("/login", loginUser);
-router.route("/").get(protect, restrictTo('admin'),getAllUsers);
+router.route("/").get(getAllUsers);
 router.delete("/:id",protect, restrictTo('admin'),deleteUserById);
 
 export default router;

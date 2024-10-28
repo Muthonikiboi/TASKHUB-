@@ -2,14 +2,6 @@ import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHome, faPeopleGroup, faClipboardCheck, faListCheck, faPlus } from "@fortawesome/free-solid-svg-icons"; 
 import '../css/navSection.css';
-// import Tasks from "../components/myTasks"
-// import Home from "../components/home";
-// import Teams from "../components/myTeams";
-
-// const handleSave = () => {
-//   // Save settings
-//   history.push('');
-// };
 
 function NavbarSection({ addTeam }) {
   const [showModal, setShowModal] = useState(false); // State for modal visibility
@@ -25,7 +17,7 @@ function NavbarSection({ addTeam }) {
   return (
     <>
       <div className="main">
-        <h1 className="title">TASKBAR</h1>
+        <h1 className="title">TASKHUB</h1>
 
         <button className="btn" onClick={() => setShowModal(true)}>
           <FontAwesomeIcon icon={faPlus} className="fas" />
@@ -70,11 +62,11 @@ function NavbarSection({ addTeam }) {
           </div>
           <div className="icons">
             <FontAwesomeIcon icon={faClipboardCheck} className="fa" />
-            <p>My Tasks</p>
+            <p>My Projects</p>
           </div>
           <div className="icons">
             <FontAwesomeIcon icon={faListCheck} className="fa" />
-            <p>Daily Activities</p>
+            <p>My Tasks</p>
           </div>
         </div>
 
