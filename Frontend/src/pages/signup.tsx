@@ -1,6 +1,9 @@
 import google from '../assets/google.png';
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import slides from '../data/Slides';
+import AuthSlider from '../components/AuthSlider';
 
 const form: React.CSSProperties = {
     width: '60%',
@@ -14,6 +17,22 @@ const form: React.CSSProperties = {
     alignItems: 'center',
     borderRadius: 20
 };
+
+const main={
+    display:"flex",
+    width:"100%",
+    height:"100vh"
+}
+const image={
+    width: "50%",
+    height:"100vh"
+}
+
+const Form={
+    width: "50%",
+    heifht: "100vh",
+    backgroundColor:"white"
+}
 
 const heading = {
     fontSize: '50px',
@@ -38,15 +57,6 @@ const label = {
     marginTop: '10px',
 };
 
-const forget = {
-    marginTop: '20px',
-    marginBottom: '20px',
-    color: '#92e3a9',
-    marginLeft: '180px',
-    textDecoration: 'underline', 
-    cursor: 'pointer',
-};
-
 const btn = {
     padding: '10px 128px',
     border: 'none',
@@ -57,6 +67,7 @@ const btn = {
     cursor: 'pointer',
     transition: 'background-color 0.3s ease',
     marginBottom: '25px',
+    marginTop: '25px',
 };
 
 const googleDiv = {
@@ -91,6 +102,8 @@ function SignUp() {
     const [useremail, setEmail] = useState('');
     const [userpassword, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
+    
+    const navigate = useNavigate(); 
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault(); 
@@ -119,9 +132,10 @@ function SignUp() {
                 setUsername('');
                 setEmail('');
                 setPassword('');
+                navigate('/');
             } else {
                 console.log(response.data.status)
-                alert(response.data.status|| 'Something went wrong!');
+                alert(response.data.status || 'Something went wrong!');
             }
             
         } catch (error) {
@@ -131,60 +145,69 @@ function SignUp() {
     };
 
     return (
-        <form onSubmit={handleSubmit} style={form}>
-            <h1 style={heading}>TASKHUB</h1><br /><br />
-            <h2 style={signIn}>SIGN UP</h2>
-            <label style={label}>
-                <p>Username</p>
-                <input
-                    type="text"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                    style={userInput}
-                    required
-                />
-            </label>
-            <label style={label}>
-                <p>Email</p>
-                <input
-                    type="email"
-                    value={useremail}
-                    onChange={(e) => setEmail(e.target.value)}
-                    style={userInput}
-                    required
-                />
-            </label>
-            <label style={label}>
-                <p>Password</p>
-                <input
-                    type="password"
-                    value={userpassword}
-                    onChange={(e) => setPassword(e.target.value)}
-                    style={userInput}
-                    required
-                />
-            </label>
-            <label style={label}>
-                <p>Confirm Password</p>
-                <input
-                    type="password"
-                    value={confirmPassword}
-                    onChange={(e) => setConfirmPassword(e.target.value)}
-                    style={userInput}
-                    required
-                />
-            </label>
-            <h4 style={forget}>Forgot password?</h4>
-            <div>
-                <button type="submit" style={btn}>Sign Up</button>
-            </div>
-            <p>or</p>
-            <div style={googleDiv}>
-                <img src={google} alt="" style={googleImg} />
-                <p>Sign in with Google</p>
-            </div>
-            <p style={pNext}>Already have an Account? <span style={span}>Sign In</span></p>
-        </form>
+        <div style={main}>
+        <div style={image}>
+           <AuthSlider slides={slides} />
+        </div>
+        <div style={Form}>
+                <form onSubmit={handleSubmit} style={form}>
+                    <h1 style={heading}>TASKHUB</h1><br /><br />
+                    <h2 style={signIn}>SIGN UP</h2>
+                    <label style={label}>
+                        <p>Username</p>
+                        <input
+                            type="text"
+                            value={username}
+                            onChange={(e) => setUsername(e.target.value)}
+                            style={userInput}
+                            required
+                        />
+                    </label>
+                    <label style={label}>
+                        <p>Email</p>
+                        <input
+                            type="email"
+                            value={useremail}
+                            onChange={(e) => setEmail(e.target.value)}
+                            style={userInput}
+                            required
+                        />
+                    </label>
+                    <label style={label}>
+                        <p>Password</p>
+                        <input
+                            type="password"
+                            value={userpassword}
+                            onChange={(e) => setPassword(e.target.value)}
+                            style={userInput}
+                            required
+                        />
+                    </label>
+                    <label style={label}>
+                        <p>Confirm Password</p>
+                        <input
+                            type="password"
+                            value={confirmPassword}
+                            onChange={(e) => setConfirmPassword(e.target.value)}
+                            style={userInput}
+                            required
+                        />
+                    </label>
+                    <div>
+                        <button type="submit" style={btn}>Sign Up</button>
+                    </div>
+                    <p>or</p>
+                    <div style={googleDiv}>
+                        <img src={google} alt="" style={googleImg} />
+                        <p>Sign in with Google</p>
+                    </div>
+                    <p style={pNext}>
+                        Already have an Account? 
+                        <span style={span} onClick={() => navigate('/')}>Sign In</span>
+                    </p>
+                </form>
+        </div>
+        </div> 
     );
 }
 

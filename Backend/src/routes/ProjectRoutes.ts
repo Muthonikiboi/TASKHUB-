@@ -15,7 +15,7 @@ const router = express.Router();
 
 router
   .route("/")
-  .get(protect, restrictTo('admin'),getAllProjects)
+  .get(getAllProjects)
   .post([body("projectname")], createProject);
 
 router

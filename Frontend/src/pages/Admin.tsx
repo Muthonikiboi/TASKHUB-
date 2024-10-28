@@ -78,7 +78,7 @@ function AdminPage() {
   const deleteTaskById = async (taskId: string) => {
     try {
       await axios.delete(`http://localhost:3000/api/v1/tasks/${taskId}`);
-      setTasks(tasks.filter((task) => task.xata_id !== taskId)); // Update UI after deletion
+      setTasks(tasks.filter((task) => task.xata_id !== taskId)); 
     } catch (error) {
       console.error("Error deleting task:", error);
     }
@@ -88,7 +88,7 @@ function AdminPage() {
   const deleteUserById = async (userId: string) => {
     try {
       await axios.delete(`http://localhost:3000/api/v1/users/${userId}`);
-      setUsers(users.filter((user) => user.xata_id !== userId)); // Update UI after deletion
+      setUsers(users.filter((user) => user.xata_id !== userId)); 
     } catch (error) {
       console.error("Error deleting user:", error);
     }
@@ -98,7 +98,7 @@ function AdminPage() {
   const deleteProjectById = async (projectId: string) => {
     try {
       await axios.delete(`http://localhost:3000/api/v1/projects/${projectId}`);
-      setProjects(projects.filter((project) => project.xata_id !== projectId)); // Update UI after deletion
+      setProjects(projects.filter((project) => project.xata_id !== projectId)); 
     } catch (error) {
       console.error("Error deleting project:", error);
     }

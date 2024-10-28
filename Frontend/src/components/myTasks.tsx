@@ -27,7 +27,7 @@ const MyTasks: React.FC = () => {
   useEffect(() => {
     const fetchTasks = async () => {
       try {
-        const response = await axios.get('http://localhost:3030/api/v1/tasks');
+        const response = await axios.get('http://localhost:3000/api/v1/tasks');
         const apiTasks = response.data.data.map((task: any) => ({
           id: task.xata_id,
           name: task.description,
@@ -49,7 +49,7 @@ const MyTasks: React.FC = () => {
     if (!commentText.trim()) return;
 
     try {
-      const response = await axios.post(`http://localhost:3030/api/v1/tasks/${taskId}/comments`, {
+      const response = await axios.post(`http://localhost:3000/api/v1/tasks/${taskId}/comments`, {
         text: commentText,
         author: "currentUser", // Replace with actual user info if available
       });
@@ -79,7 +79,7 @@ const MyTasks: React.FC = () => {
   // Fetch comments for the selected task
   const fetchComments = async (taskId: string) => {
     try {
-      const response = await axios.get(`http://localhost:3030/api/v1/tasks/${taskId}/comments`);
+      const response = await axios.get(`http://localhost:3000/api/v1/tasks/${taskId}/comments`);
       setTasks(prevTasks => 
         prevTasks.map(task => 
           task.id === taskId 

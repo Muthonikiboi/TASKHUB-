@@ -44,7 +44,7 @@ const Projects: React.FC = () => {
   useEffect(() => {
     const fetchProjects = async () => {
       try {
-        const response = await axios.get('http://localhost:7000/api/v1/projects');
+        const response = await axios.get('http://localhost:3000/api/v1/projects');
         const apiProjects = response.data.data.map((project: any) => ({
           id: project.xata_id,
           name: project.projectname,
@@ -65,7 +65,7 @@ const Projects: React.FC = () => {
   // Fetch team members for a given team ID
   const fetchTeamMembers = async (teamId: string) => {
     try {
-      const response = await axios.get(`http://localhost:7000/api/v1/teams/${teamId}/members`);
+      const response = await axios.get(`http://localhost:3000/api/v1/teams/${teamId}/members`);
       setTeamMembers(response.data.data.map((member: any) => ({
         id: member.xata_id, // Adjust based on your API response
         name: member.name, // Adjust based on your API response
@@ -82,7 +82,7 @@ const Projects: React.FC = () => {
     if (selectedTask) {
       // Update existing task
       try {
-        await axios.put(`http://localhost:7000/api/v1/tasks/${selectedTask.id}`, {
+        await axios.put(`http://localhost:3000/api/v1/tasks/${selectedTask.id}`, {
           name: taskName,
           description: taskDescription,
           due_date: taskDueDate,
@@ -115,7 +115,7 @@ const Projects: React.FC = () => {
     } else {
       // Add new task
       try {
-        const response = await axios.post('http://localhost:7000/api/v1/tasks', {
+        const response = await axios.post('http://localhost:3000/api/v1/tasks', {
           name: taskName,
           description: taskDescription,
           due_date: taskDueDate,
@@ -245,7 +245,7 @@ const Projects: React.FC = () => {
                 onChange={(e) => setTaskDescription(e.target.value)} 
               />
               <select value={taskAssignee} onChange={(e) => setTaskAssignee(e.target.value)}>
-                <option value="Unassigned">Unassigned</option>
+                <option value="Unassigned">Assign To</option>
                 {teamMembers.map((member) => (
                   <option key={member.id} value={member.name}>{member.name}</option>
                 ))}

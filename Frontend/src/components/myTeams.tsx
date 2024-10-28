@@ -29,7 +29,7 @@ const Teams: React.FC = () => {
   useEffect(() => {
     const fetchTeams = async () => {
       try {
-        const response = await axios.get('http://localhost:7000/api/v1/teams');
+        const response = await axios.get('http://localhost:3000/api/v1/teams');
         const apiTeams = response.data.data.map((team: any) => ({
           id: team.xata_id,
           name: team.teamname,
@@ -51,7 +51,7 @@ const Teams: React.FC = () => {
     if (!projectName.trim()) return;
 
     try {
-      const response = await axios.post('http://localhost:7000/api/v1/projects', {
+      const response = await axios.post('http://localhost:3000/api/v1/projects', {
         projectname: projectName,
         team_id: selectedTeamId
       });

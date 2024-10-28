@@ -3,6 +3,9 @@ import { getXataClient } from '../xata';
 import bcrypt from 'bcrypt';
 import AppError from '../utils/AppError';
 import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const xata = getXataClient();
 
@@ -42,6 +45,7 @@ export const registerUser = async (req: Request, res: Response, next: NextFuncti
         });
 
     }catch (err) {
+        console.log(err);
         return next(new AppError('Error creating user', 500));
     }
 }
@@ -80,6 +84,7 @@ export const loginUser = async (req: Request, res: Response, next: NextFunction)
         });
 
     }catch (err) {
+        console.log(err)
         return next(new AppError('Error logging in the user', 500));
     }
 }

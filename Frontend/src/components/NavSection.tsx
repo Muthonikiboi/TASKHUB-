@@ -17,7 +17,7 @@ function NavbarSection({ addTeam }) {
   return (
     <>
       <div className="main">
-        <h1 className="title">TASKBAR</h1>
+        <h1 className="title">TASKHUB</h1>
 
         <button className="btn" onClick={() => setShowModal(true)}>
           <FontAwesomeIcon icon={faPlus} className="fas" />

@@ -1,0 +1,22 @@
+{
+  "done": true,
+  "migration": {
+    "name": "mig_csdpmg1ato8au6r3snpg",
+    "operations": [
+      {
+        "drop_constraint": {
+          "up": "\"username\"",
+          "down": "\"username\"",
+          "name": "Users__pgroll_new_username_key",
+          "table": "Users",
+          "column": "username"
+        }
+      }
+    ]
+  },
+  "migrationType": "pgroll",
+  "name": "mig_csdpmg1ato8au6r3snpg",
+  "parent": "mig_csccuh6k0a6tb3s70ek0",
+  "schema": "public",
+  "startedAt": "2024-10-25T13:21:04.925665Z"
+}
