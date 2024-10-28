@@ -17,7 +17,6 @@ const form: React.CSSProperties = {
     alignItems: 'center',
     borderRadius: 20
 };
-
 const main={
     display:"flex",
     width:"100%",
@@ -33,7 +32,6 @@ const Form={
     heifht: "100vh",
     backgroundColor:"white"
 }
-
 const heading = {
     fontSize: '50px',
     marginBottom: '15px',
@@ -68,7 +66,6 @@ const btn = {
     transition: 'background-color 0.3s ease',
     marginBottom: '25px',
     marginTop: '25px',
-};
 
 const googleDiv = {
     display: 'flex',

@@ -17,6 +17,7 @@ router
   .route("/")
   .get(getAllComments)
   .post([body("content")], createComment);
+  
 
 router
   .route("/:id")
